@@ -1,0 +1,1 @@
+angular.module("fcc-voting", ["angular-meteor", "ui.router"]);
