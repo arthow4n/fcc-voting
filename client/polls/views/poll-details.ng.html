@@ -1,0 +1,12 @@
+<h2>{{pollTitle}}</h2>
+
+<form ng-submit="submitVote()">
+    <h3>I'd like to vote for...: </h3>
+    <div ng-repeat="option in chartLabels">
+        <input id="options{{$index+1}}" type="radio" name="votefor" ng-model="$parent.votefor" ng-value="option"><label for="options{{$index+1}}">{{option}}</label>
+    </div>
+    <label for="custom-option">Or vote with my own option: </label><input id="custom-option" type="text" name="votefor" ng-model="votefor" ng-trim="true">
+    <input type="submit" value="Submit">
+</form>
+
+<canvas class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-legend="true"></canvas>

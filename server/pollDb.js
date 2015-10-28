@@ -3,7 +3,7 @@ Polls.allow({
         return false;
     },
     update: function (userId, poll, fields, modifier) {
-        return false;
+        return true;
     },
     remove: function (userId, poll) {
         return false;
@@ -12,6 +12,7 @@ Polls.allow({
 
 
 Meteor.methods({
+    
     addNewPoll: function (title, options) {
         var spaceOnly = /^\s*$/g;
         if (spaceOnly.test(title) === false &&
@@ -21,6 +22,7 @@ Meteor.methods({
             pendingPoll.owner = Meteor.userId();
             pendingPoll.title = title;
             pendingPoll.results = {};
+            pendingPoll.votedBy = [];
             for (var i = 0; i < options.length; i++) {
                 pendingPoll.results[options[i]] = 0;
             }
@@ -30,5 +32,24 @@ Meteor.methods({
         } else {
             throw new Meteor.Error(400,"Bad Request");
         }
+    },
+    
+    voteFor: function (pollId, option) {
+        var spaceOnly = /^\s*$/g;
+        
+        var inc = {};
+        inc["results."+option] = 1;
+        console.log(inc);
+        
+        if (spaceOnly.test(option) === false) {
+            return Polls.update(pollId, {
+                $inc: inc,
+                $push: {votedBy: Meteor.userId()}
+            });
+        } else {
+            throw new Meteor.Error(400,"Bad Request");
+        }
+        
     }
+    
 });

@@ -1,1 +1,1 @@
-angular.module("fcc-voting", ["angular-meteor", "ui.router"]);
+angular.module("fcc-voting", ["angular-meteor", "ui.router", "chart.js"]);
