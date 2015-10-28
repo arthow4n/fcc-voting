@@ -1,1 +1,9 @@
-{{1 + 2}}
+<input type="checkbox" ng-model="showMyPollsOnly" id="mypolls-only"><label for="mypolls-only">Show only polls owned by me.</label>
+
+<ul>
+    <li ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">
+        {{poll.owner}}
+        {{poll.title}}
+        {{poll.results}}
+    </li>
+</ul>

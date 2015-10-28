@@ -12,6 +12,12 @@ Meteor.startup( function () {
                     results: { "KDE": 20,
                                 "Xfce": 20,
                                 "Cinnamon": 8}
+                },
+                { owner: "BLAH!",
+                    title: "??",
+                    results: { "123": 2,
+                                "456": 2,
+                                "789": 5}
                 }
             ];
         for (var i = 0; i < polls.length; i++) {
