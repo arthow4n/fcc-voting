@@ -1,5 +1,5 @@
-angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$location", 
-    function ($scope, $meteor, $location) {
+angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$state", 
+    function ($scope, $meteor, $state) {
         $scope.polls = $meteor.collection(Polls);
         $scope.newPollTitle = "";
         $scope.newPollOptions = [];
@@ -14,7 +14,7 @@ angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$l
                         console.log("addNewPollSuccess");
                         $scope.newPollTitle = "";
                         $scope.newPollOptions = [];
-                        $location.url("/polls/" + result);
+                        $state.go("pollDetails", {pollId: result}, {reload: true});
                         $scope.$apply();
                     }
                 });

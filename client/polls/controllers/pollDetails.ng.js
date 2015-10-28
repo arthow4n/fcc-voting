@@ -9,13 +9,13 @@ angular.module("fcc-voting")
         
     }])
     
-    .controller("PollDetailsCtrl", ["$scope", "$stateParams", "$meteor", "$location",
+    .controller("PollDetailsCtrl", ["$scope", "$stateParams", "$meteor", "$state",
     
-        function ($scope, $stateParams, $meteor, $location) {
+        function ($scope, $stateParams, $meteor, $state) {
             
             if ($meteor.object(Polls, $stateParams.pollId)._id !== $stateParams.pollId) {
                 window.alert("Wrong PollId provided.");
-                $location.url("/polls");
+                $state.go("pollsList");
             }
             
             var poll = $meteor.object(Polls, $stateParams.pollId);
@@ -36,6 +36,7 @@ angular.module("fcc-voting")
                             window.alert("Something went wrong while voting.");
                         } else {
                             window.alert("You've voted for" + $scope.votefor + ".");
+                            $state.go($state.current, {}, {reload: true});
                         }
                     });
                 } else {
