@@ -9,7 +9,7 @@ angular.module("fcc-voting").config(
             templateUrl: "client/polls/views/polls-list.ng.html",
             controller: "PollsListCtrl"
         })
-        .state({
+        .state("newPoll", {
             url: "/newpoll",
             templateUrl: "client/polls/views/new-poll.ng.html",
             controller: "NewPollCtrl"

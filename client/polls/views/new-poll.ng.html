@@ -1,0 +1,9 @@
+<form>
+    <h1>Make a new poll!</h1>
+    <label for="newpoll-title">Title: </label><input type="text" ng-model="newPollTitle" ng-trim="true">
+    <label for="newpoll-options">Options (seperate each option with new line): </label>
+    <textarea ng-model="newPollOptions" ng-list="&#10;" ng-trim="false"></textarea>
+    <button ng-click="addNewPoll()">Make!</button>
+    {{newPollTitle}}
+    {{newPollOptions | json}}
+</form>
