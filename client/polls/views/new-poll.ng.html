@@ -1,9 +1,14 @@
-<form>
-    <h1>Make a new poll!</h1>
-    <label for="newpoll-title">Title: </label><input type="text" ng-model="newPollTitle" ng-trim="true">
-    <label for="newpoll-options">Options (seperate each option with new line): </label>
-    <textarea ng-model="newPollOptions" ng-list="&#10;" ng-trim="false"></textarea>
-    <button ng-click="addNewPoll()">Make!</button>
-    {{newPollTitle}}
-    {{newPollOptions | json}}
-</form>
+<div class="jumbotron" ng-submit="addNewPoll()">
+    <form role="form">
+        <h1>Make a new poll!</h1>
+        <div class="form-group">
+            <label for="newpoll-title">Title: </label>
+            <input class="form-control" type="text" ng-model="newPollTitle" ng-trim="true">
+        </div>
+        <div class="form-group">
+            <label for="newpoll-options">Options (seperated by line): </label>
+            <textarea class="form-control" ng-model="newPollOptions" ng-list="&#10;" ng-trim="false" rows="4"></textarea>
+        </div>
+        <input type="submit" value="Make!" class="btn btn-primary">
+    </form>
+</div>
