@@ -2,31 +2,36 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
-<body class="container-fluid">
-    <main ng-app="fcc-voting" ng-controller="indexCtrl" ng-strict-di>
-        <nav class="navbar navbar-default">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-items">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a href="/polls" class="navbar-brand">fcc-voting</a>
-            </div>
-            <div class="collapse navbar-collapse" id="nav-items">
-                <ul class="nav navbar-nav navbar-right">
-                    <li ui-sref-active="active"><a ui-sref="pollsList">Home</a></li>
-                    <li ng-show="userId" ui-sref-active="active"><a ui-sref="myPolls">My Polls</a></li>
-                    <li ng-show="userId" ui-sref-active="active"><a ui-sref="newPoll">New Poll</a></li>
-                    <li class="nav navbar-nav">{{> loginButtons}}</li>
-                </ul>
-            </div>
-        </nav>
-        <div ui-view></div>
-    </main>
-    <footer>
-        <span>This "fcc-voting" app is built by @arthow4n of freecodecamp,</span>
-        <br>
-        <span>following the instructions of <a href="http://freecodecamp.com/challenges/basejump-build-a-voting-app" target="_blank">"Basejump: Build a Voting App | Free Code Camp"</a>.</span>
-    </footer>
+<body class="container">
+    <div id="div-main" ng-app="fcc-voting" ng-controller="indexCtrl" ng-strict-di>
+        <header>
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#nav-items">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/polls" class="navbar-brand">fcc-voting</a>
+                </div>
+                <div class="collapse navbar-collapse" id="nav-items">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li ui-sref-active="active"><a ui-sref="pollsList">Home</a></li>
+                        <li ng-show="userId" ui-sref-active="active"><a ui-sref="myPolls">My Polls</a></li>
+                        <li ng-show="userId" ui-sref-active="active"><a ui-sref="newPoll">New Poll</a></li>
+                        <li class="nav navbar-nav">{{> loginButtons}}</li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div ui-view></div>
+        </main>
+        <footer>
+            <span>This "fcc-voting" app is built by @arthow4n of freecodecamp,</span>
+            <br>
+            <span>following the instructions of <a href="http://freecodecamp.com/challenges/basejump-build-a-voting-app" target="_blank">"Basejump: Build a Voting App | Free Code Camp"</a>.</span>
+        </footer>
+    </div>
+    
 </body>

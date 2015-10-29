@@ -1,9 +1,8 @@
-<a href="/newpoll" ng-show="userId" > or make a new poll!</a>
-<ul>
-    <li ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">
-        <a ng-href="/polls/{{poll._id}}">{{poll._id}}</a>
-        {{poll.owner}}
-        {{poll.title}}
-        {{poll.results}}
-    </li>
-</ul>
+<div class="jumbotron text-center">
+    <h1>fcc-voting</h1>
+    <p>Select a poll below to see the results and vote<span ng-hide="userId">, or sign-in to make a new poll.</span><a href="/newpoll" ng-show="userId" >, or make a new poll!</a></p>
+    <ul class="list-group">
+        <a class="list-group-item" ng-href="/polls/{{poll._id}}" ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">{{poll.title}}</a>
+    </ul>
+</div>    
+

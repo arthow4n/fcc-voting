@@ -1,13 +1,4 @@
 angular.module("fcc-voting")
-
-    .config(["ChartJsProvider", function (ChartJsProvider) {
-        
-        ChartJsProvider.setOptions({
-            
-            responsive: false
-        });
-        
-    }])
     
     .controller("PollDetailsCtrl", ["$scope", "$stateParams", "$meteor", "$state",
     
