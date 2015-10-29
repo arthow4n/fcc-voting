@@ -24,7 +24,7 @@ angular.module("fcc-voting")
             $scope.chartLabels = Object.keys(poll.results);
             $scope.chartData = [];
             $scope.isPollOwner = (poll.owner === Meteor.userId());
-            
+            $scope.userId = Meteor.userId();
             for (var i = 0; i < $scope.chartLabels.length; i++) {
                 $scope.chartData.push(poll.results[$scope.chartLabels[i]]);
             }

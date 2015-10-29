@@ -1,4 +1,4 @@
-<a href="/newpoll">Make a New Poll!</a>
+<a href="/newpoll" ng-show="Meteor.userId()">Make a New Poll!</a>
 
 <div ng-show="userId"><input type="checkbox" ng-model="showMyPollsOnly" id="mypolls-only"><label for="mypolls-only">Show only polls owned by me.</label></div>
 

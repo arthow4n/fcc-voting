@@ -5,7 +5,7 @@
     <div ng-repeat="option in chartLabels">
         <input id="options{{$index+1}}" type="radio" name="votefor" ng-model="$parent.votefor" ng-value="option"><label for="options{{$index+1}}">{{option}}</label>
     </div>
-    <label for="custom-option">Or vote with my own option: </label><input id="custom-option" type="text" name="votefor" ng-model="votefor" ng-trim="true">
+    <div ng-show="userId"><label for="custom-option">Or vote with my own option: </label><input id="custom-option" type="text" name="votefor" ng-model="votefor" ng-trim="true"></div>
     <input type="submit" value="Submit">
 </form>
 
