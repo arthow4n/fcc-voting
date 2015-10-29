@@ -20,6 +20,7 @@ angular.module("fcc-voting")
             
             var poll = $meteor.object(Polls, $stateParams.pollId);
             $scope.pollTitle = poll.title;
+            $scope.votedBy = poll.votedBy;
             $scope.chartLabels = Object.keys(poll.results);
             $scope.chartData = [];
             $scope.isPollOwner = (poll.owner === Meteor.userId());
@@ -33,9 +34,7 @@ angular.module("fcc-voting")
                     Meteor.call("voteFor", poll._id, $scope.votefor,function (error, result) {
                         
                         if (error || result === 0) {
-                            console.log( error );
-                            console.log( result );
-                            window.alert("Something went wrong while voting.");
+                            window.alert(error);
                         } else {
                             window.alert("You've voted for" + $scope.votefor + ".");
                             $state.go($state.current, {}, {reload: true});
@@ -49,7 +48,7 @@ angular.module("fcc-voting")
             $scope.removePoll = function () {
                 Meteor.call("removePoll", poll._id, function (error, result) {
                     if (error) {
-                        window.alert("Something went wrong while removing the poll.");
+                        window.alert(error);
                         $state.go($state.current, {}, {reload: true});
                     } else {
                         window.alert("Successfully removed the poll.");
