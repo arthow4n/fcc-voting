@@ -1,7 +1,5 @@
 <a href="/newpoll" ng-show="Meteor.userId()">Make a New Poll!</a>
 
-<div ng-show="userId"><input type="checkbox" ng-model="showMyPollsOnly" id="mypolls-only"><label for="mypolls-only">Show only polls owned by me.</label></div>
-
 <ul>
     <li ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">
         <a ng-href="/polls/{{poll._id}}">{{poll._id}}</a>

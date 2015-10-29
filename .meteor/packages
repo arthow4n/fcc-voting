@@ -19,8 +19,9 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 autopublish             # Publish all data to the clients (for prototyping)
 angular
 angularui:angular-ui-router
-accounts-ui
 accounts-twitter
 urigo:angular-blaze-template
 sebastianilves:angular-chart-js
 gwendall:auth-client-callbacks
+twbs:bootstrap
+ian:accounts-ui-bootstrap-3

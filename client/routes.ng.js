@@ -16,7 +16,23 @@ angular.module("fcc-voting").config(
         .state("pollsList", {
             url: "/polls",
             templateUrl: "client/polls/views/polls-list.ng.html",
-            controller: "PollsListCtrl"
+            controller: "PollsListCtrl",
+            data: {
+                showMyPollsOnly: false
+            }
+        })
+        .state("myPolls", {
+            url: "/mypolls",
+            templateUrl: "client/polls/views/polls-list.ng.html",
+            controller: "PollsListCtrl",
+            data: {
+                showMyPollsOnly: true
+            },
+            resolve: {
+                currentUser: function ($meteor) {
+                    return $meteor.requireUser();
+                }
+            }
         })
         .state("newPoll", {
             url: "/newpoll",
