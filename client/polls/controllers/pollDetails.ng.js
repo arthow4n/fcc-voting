@@ -46,15 +46,17 @@ angular.module("fcc-voting")
             };
             
             $scope.removePoll = function () {
-                Meteor.call("removePoll", poll._id, function (error, result) {
-                    if (error) {
-                        window.alert(error);
-                        $state.go($state.current, {}, {reload: true});
-                    } else {
-                        window.alert("Successfully removed the poll.");
-                        $state.go("pollsList", {}, {reload: true});
-                    }
-                });
+                if (window.confirm("Are you sure to remove this poll?")) {
+                    Meteor.call("removePoll", poll._id, function (error, result) {
+                        if (error) {
+                            window.alert(error);
+                            $state.go($state.current, {}, {reload: true});
+                        } else {
+                            window.alert("Successfully removed the poll.");
+                            $state.go("pollsList", {}, {reload: true});
+                        }
+                    });
+                }
             };
             
     }]);

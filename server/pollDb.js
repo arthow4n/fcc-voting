@@ -55,7 +55,7 @@ Meteor.methods({
                     $push: {votedBy: { $each: whoVoting }}
                 });
             } else {
-                throw new Meteor.Error("user-voted","You can only vote once a poll.");
+                throw new Meteor.Error("user-or-ip-voted","You can only vote once a poll.");
             }
         } else {
             throw new Meteor.Error(400,"Bad Request");
