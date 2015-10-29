@@ -1,3 +1,12 @@
+angular.module("fcc-voting").run( function ($rootScope, $state) {
+    $rootScope.$on("stateChangeError", function (event, toState, toParams, fromState, fromParams, error) {
+       if (error === "AUTH_REQUIRED") {
+           $state.go("pollsList");
+       } 
+    });
+});
+
+
 angular.module("fcc-voting").config(
     function ($urlRouterProvider, $stateProvider, $locationProvider) {
     
@@ -12,7 +21,12 @@ angular.module("fcc-voting").config(
         .state("newPoll", {
             url: "/newpoll",
             templateUrl: "client/polls/views/new-poll.ng.html",
-            controller: "NewPollCtrl"
+            controller: "NewPollCtrl",
+            resolve: {
+                currentUser: function ($meteor) {
+                    return $meteor.requireUser();
+                }
+            }
         })
         .state("pollDetails", {
             url: "/polls/:pollId",

@@ -15,7 +15,8 @@ var spaceOnly = /^\s*$/g;
 Meteor.methods({
     
     addNewPoll: function (title, options) {
-        if (spaceOnly.test(title) === false &&
+        if (Meteor.userId() &&
+            spaceOnly.test(title) === false &&
             Array.isArray(options) &&
             options.length >= 2) {
             var pendingPoll = {};
