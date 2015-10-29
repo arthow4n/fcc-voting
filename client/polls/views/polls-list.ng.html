@@ -1,5 +1,4 @@
-<a href="/newpoll" ng-show="Meteor.userId()">Make a New Poll!</a>
-
+<a href="/newpoll" ng-show="userId" > or make a new poll!</a>
 <ul>
     <li ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">
         <a ng-href="/polls/{{poll._id}}">{{poll._id}}</a>

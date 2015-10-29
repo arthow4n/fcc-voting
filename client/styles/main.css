@@ -1,8 +1,13 @@
 .container-fluid {
     margin: 0 auto;
     padding: 0;
+    max-width: 1024px;
 }
 
 .navbar {
     border-radius: 0;
+}
+
+html, body, main, .container-fluid {
+    height: 100%;
 }
