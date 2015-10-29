@@ -26,5 +26,5 @@ angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$s
                     window.alert("You need 2 or more options to make a poll!");
                 }
             }
-        }
+        };
 }]);

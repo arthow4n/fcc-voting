@@ -3,7 +3,7 @@ Polls.allow({
         return false;
     },
     update: function (userId, poll, fields, modifier) {
-        return true;
+        return false;
     },
     remove: function (userId, poll) {
         return false;
@@ -11,10 +11,10 @@ Polls.allow({
 });
 
 
+var spaceOnly = /^\s*$/g;
 Meteor.methods({
     
     addNewPoll: function (title, options) {
-        var spaceOnly = /^\s*$/g;
         if (spaceOnly.test(title) === false &&
             Array.isArray(options) &&
             options.length >= 2) {
@@ -35,8 +35,6 @@ Meteor.methods({
     },
     
     voteFor: function (pollId, option) {
-        var spaceOnly = /^\s*$/g;
-        
         var inc = {};
         inc["results."+option] = 1;
         console.log(inc);
@@ -49,7 +47,14 @@ Meteor.methods({
         } else {
             throw new Meteor.Error(400,"Bad Request");
         }
-        
-    }
+    },
     
+    removePoll: function (pollId) {
+        var poll = Polls.findOne(pollId);
+        if (poll.owner === Meteor.userId()) {
+            Polls.remove(poll);
+        } else {
+            throw new Meteor.Error(400, "Bad Request");
+        }
+    }
 });
