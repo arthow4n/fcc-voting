@@ -21,6 +21,12 @@ Meteor.startup( function () {
                                 "456": 2,
                                 "789": 5},
                     votedBy: []
+                },
+                { owner: "BLAH!",
+                    title: "??",
+                    results: { 1:1, 2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 8:8, 9:9, 10:10
+                    },
+                    votedBy: []
                 }
             ];
         for (var i = 0; i < polls.length; i++) {

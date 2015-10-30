@@ -1,14 +1,31 @@
-<h2>{{pollTitle}}</h2>
-{{votedBy}}
-<form ng-submit="submitVote()">
-    <h3>I'd like to vote for...: </h3>
-    <div ng-repeat="option in chartLabels">
-        <input id="options{{$index+1}}" type="radio" name="votefor" ng-model="$parent.votefor" ng-value="option"><label for="options{{$index+1}}">{{option}}</label>
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-sm-4">
+            <p>{{pollTitle}}</p>
+            <form ng-submit="submitVote()">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="votefor">I'd like to vote for...: </label>
+                                <select id="votefor" class="form-control" ng-model="votefor">
+                                    <option value="" disabled selected hidden>Choose an option...: </option>
+                                    <option ng-repeat="option in chartLabels" ng-value="option">{{option}}</option>
+                                    <option ng-show="userId" value="===custom-option" >I'd like a custom option</option>
+                                </select>
+                                <div class="form-group" ng-show="votefor === '===custom-option'"><label for="custom-option">Vote with my own option: </label><input id="custom-option" type="text" ng-model="voteforCustom" ng-trim="true"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <input class="btn btn-primary btn-block" type="submit" value="Submit">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-8">
+            <canvas class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-legend="true"></canvas>
+            <button class="btn btn-block btn-danger" ng-click="removePoll()" ng-show="isPollOwner">Remove this Poll</button>
+        </div>
     </div>
-    <div ng-show="userId"><label for="custom-option">Or vote with my own option: </label><input id="custom-option" type="text" name="votefor" ng-model="votefor" ng-trim="true"></div>
-    <input type="submit" value="Submit">
-</form>
-
-<canvas class="chart chart-doughnut" chart-data="chartData" chart-labels="chartLabels" chart-legend="true"></canvas>
-
-<button ng-click="removePoll()" ng-show="isPollOwner">Remove this Poll</button>
+</div>

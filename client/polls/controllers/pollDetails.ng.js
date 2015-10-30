@@ -11,7 +11,6 @@ angular.module("fcc-voting")
             
             var poll = $meteor.object(Polls, $stateParams.pollId);
             $scope.pollTitle = poll.title;
-            $scope.votedBy = poll.votedBy;
             $scope.chartLabels = Object.keys(poll.results);
             $scope.chartData = [];
             $scope.isPollOwner = (poll.owner === Meteor.userId());
@@ -21,13 +20,19 @@ angular.module("fcc-voting")
             }
             
             $scope.submitVote = function () {
-                if ($scope.votefor) {
-                    Meteor.call("voteFor", poll._id, $scope.votefor,function (error, result) {
-                        
+                var votefor = "";
+                if ($scope.votefor && $scope.votefor !== "===custom-option") {
+                    votefor = $scope.votefor;
+                } else if ($scope.votefor === "===custom-option" && $scope.voteforCustom) {
+                    votefor = $scope.voteforCustom;
+                }
+                
+                if (votefor) {
+                    Meteor.call("voteFor", poll._id, votefor,function (error, result) {
                         if (error || result === 0) {
                             window.alert(error);
                         } else {
-                            window.alert("You've voted for" + $scope.votefor + ".");
+                            window.alert("You've voted for" + votefor + ".");
                             $state.go($state.current, {}, {reload: true});
                         }
                     });
