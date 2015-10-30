@@ -37,7 +37,6 @@ Meteor.methods({
         var clientIp = (this.connection.httpHeaders["x-forwarded-for"]).split(",")[0];
         var poll = Polls.findOne(pollId);
         var userHaveNotVoted = Meteor.userId() && poll.votedBy.indexOf(Meteor.userId()) === -1;
-        console.log(poll.votedBy.indexOf(Meteor.userId()));
         var IpHaveNotVoted = poll.votedBy.indexOf(clientIp) === -1;
         var inc = {};
         inc["results."+option] = 1;
