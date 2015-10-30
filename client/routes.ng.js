@@ -22,13 +22,6 @@ angular.module("fcc-voting")
                 controller: "PollsListCtrl",
                 data: {
                     showMyPollsOnly: false
-                },
-                resolve: {
-                    subscribe: [
-                        '$meteor', function($meteor) {
-                            return $meteor.subscribe("polls");
-                        }
-                    ]
                 }
             })
             .state("myPolls", {
@@ -41,13 +34,8 @@ angular.module("fcc-voting")
                 resolve: {
                     currentUser: function ($meteor) {
                         return $meteor.requireUser();
-                    },
-                    subscribe: [
-                        '$meteor', function($meteor) {
-                            return $meteor.subscribe("polls");
-                        }
-                    ]
-                },
+                    }
+                }
             })
             .state("newPoll", {
                 url: "/newpoll",

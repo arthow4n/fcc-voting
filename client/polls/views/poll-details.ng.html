@@ -1,5 +1,6 @@
 <div class="jumbotron">
-    <div class="row">
+    <p ng-hide="dataLoaded">Now loading /polls/{{statePollId}}...</p>
+    <div class="row" ng-show="dataLoaded">
         <div class="col-sm-4">
             <p>{{pollTitle}}</p>
             <form ng-submit="submitVote()">

@@ -1,10 +1,13 @@
 <div class="jumbotron text-center">
     <h1>fcc-voting</h1>
-    <p ng-show="showMyPollsOnly">Below are polls you own.</p>
-    <p ng-hide="showMyPollsOnly">Below are polls hosted by fcc-voting.</p>
-    <p>Select a poll to see the results and vote<span ng-hide="userId">, or sign-in to make a new poll.</span><a href="/newpoll" ng-show="userId" >, or make a new poll!</a></p>
-    <ul class="list-group">
-        <a class="list-group-item" ng-href="/polls/{{poll._id}}" ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">{{poll.title}}</a>
-    </ul>
+    <p ng-hide="dataLoaded">Now loading...</p>
+    <div ng-show="dataLoaded">
+        <p ng-show="showMyPollsOnly">Below are polls you own.</p>
+        <p ng-hide="showMyPollsOnly">Below are polls hosted by fcc-voting.</p>
+        <p>Select a poll to see the results and vote<span ng-hide="userId">, or sign-in to make a new poll.</span><a href="/newpoll" ng-show="userId" >, or make a new poll!</a></p>
+        <ul class="list-group">
+            <a class="list-group-item" ng-href="/polls/{{poll._id}}" ng-repeat="poll in polls | filter: (showMyPollsOnly) && {owner:userId} || ''">{{poll.title}}</a>
+        </ul>
+    </div>
 </div>    
 

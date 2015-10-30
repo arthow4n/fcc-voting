@@ -3,21 +3,27 @@ angular.module("fcc-voting")
     .controller("PollDetailsCtrl", ["$scope", "$stateParams", "$meteor", "$state",
     
         function ($scope, $stateParams, $meteor, $state) {
-            
-            if ($meteor.object(Polls, $stateParams.pollId)._id !== $stateParams.pollId) {
-                window.alert("Wrong PollId provided.");
-                $state.go("pollsList");
-            }
-            
-            var poll = $meteor.object(Polls, $stateParams.pollId);
-            $scope.pollTitle = poll.title;
-            $scope.chartLabels = Object.keys(poll.results);
-            $scope.chartData = [];
-            $scope.isPollOwner = (poll.owner === Meteor.userId());
-            $scope.userId = Meteor.userId();
-            for (var i = 0; i < $scope.chartLabels.length; i++) {
-                $scope.chartData.push(poll.results[$scope.chartLabels[i]]);
-            }
+            $scope.statePollId = $stateParams.pollId;
+            $scope.dataLoaded = false;
+            var poll = undefined;
+            $meteor.subscribe("polls", $stateParams.pollId).then(function (subscribeHandle) {
+                poll = $meteor.object(Polls, $stateParams.pollId);
+                
+                if (poll._id) {
+                    $scope.dataLoaded = true;
+                    $scope.pollTitle = poll.title;
+                    $scope.chartLabels = Object.keys(poll.results);
+                    $scope.chartData = [];
+                    $scope.isPollOwner = (poll.owner === Meteor.userId());
+                    $scope.userId = Meteor.userId();
+                    for (var i = 0; i < $scope.chartLabels.length; i++) {
+                        $scope.chartData.push(poll.results[$scope.chartLabels[i]]);
+                    }
+                } else {
+                    window.alert("Wrong PollId provided.");
+                    $state.go("pollsList");
+                }
+            });
             
             $scope.submitVote = function () {
                 var votefor = "";
