@@ -1,6 +1,5 @@
 angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$state", 
     function ($scope, $meteor, $state) {
-        $scope.polls = $meteor.collection(Polls);
         $scope.newPollTitle = "";
         $scope.newPollOptions = [];
         
