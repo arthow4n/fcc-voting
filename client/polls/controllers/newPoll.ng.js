@@ -2,7 +2,7 @@ angular.module("fcc-voting").controller("NewPollCtrl", ["$scope", "$meteor", "$s
     function ($scope, $meteor, $state) {
         $scope.newPollTitle = "";
         $scope.newPollOptions = [];
-        
+        document.title = "Make a new poll | fcc-voting";
         $scope.addNewPoll = function () {
             if ($scope.newPollTitle !== "" && $scope.newPollOptions.length >= 2) {
                 Meteor.call("addNewPoll", $scope.newPollTitle, $scope.newPollOptions, function (error, result) {

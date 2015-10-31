@@ -11,6 +11,7 @@ angular.module("fcc-voting")
                 
                 if (poll._id) {
                     $scope.dataLoaded = true;
+                    document.title =  poll.title + " | fcc-voting";
                     $scope.pollTitle = poll.title;
                     $scope.chartLabels = Object.keys(poll.results);
                     $scope.chartData = [];
