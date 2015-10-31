@@ -1,8 +1,16 @@
+var shareitDep = new Tracker.Dependency();
+
+Template.shareitEnh.shareData = function () {
+    shareitDep.depend();
+    return {title: document.title};
+};
+
 angular.module("fcc-voting")
     
     .controller("PollDetailsCtrl", ["$scope", "$stateParams", "$meteor", "$state",
     
         function ($scope, $stateParams, $meteor, $state) {
+            
             $scope.statePollId = $stateParams.pollId;
             $scope.dataLoaded = false;
             var poll = undefined;
@@ -12,6 +20,7 @@ angular.module("fcc-voting")
                 if (poll._id) {
                     $scope.dataLoaded = true;
                     document.title =  poll.title + " | fcc-voting";
+                    shareitDep.changed();
                     $scope.pollTitle = poll.title;
                     $scope.chartLabels = Object.keys(poll.results);
                     $scope.chartData = [];
