@@ -3,6 +3,7 @@ ShareIt.init({
     sites: {
       
     },
+    classes: "btn btn-block",
     iconOnly: false,
     applyColors: true
 });
