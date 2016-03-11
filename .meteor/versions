@@ -33,6 +33,7 @@ ecmascript-runtime@0.2.6
 ejson@1.0.7
 es5-shim@4.1.14
 fastclick@1.0.7
+force-ssl@1.0.6
 fortawesome:fontawesome@4.2.0_2
 geojson-utils@1.0.4
 gwendall:auth-client-callbacks@0.1.0

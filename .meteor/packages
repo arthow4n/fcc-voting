@@ -25,3 +25,4 @@ gwendall:auth-client-callbacks
 twbs:bootstrap
 ian:accounts-ui-bootstrap-3
 liberation:shareit
+force-ssl
