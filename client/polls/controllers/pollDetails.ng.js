@@ -48,7 +48,7 @@ angular.module("fcc-voting")
                         if (error || result === 0) {
                             window.alert(error);
                         } else {
-                            window.alert("You've voted for" + votefor + ".");
+                            window.alert("You've voted for: " + votefor + ".");
                             $state.go($state.current, {}, {reload: true});
                         }
                     });
