@@ -10,10 +10,21 @@ Polls.allow({
     }
 });
 
-
 var spaceOnly = /^\s*$/g;
+var htmlEntitiesEscapeMap = {
+    '&': '&amp;',
+    '&amp;': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+};
+var escapeHtmlEntites = function (input) {
+    return input.replace(/[&<>]/g, function (char) {
+        return htmlEntitiesEscapeMap[char] || char;
+    });
+};
+
 Meteor.methods({
-    
+
     addNewPoll: function (title, options) {
         if (Meteor.userId() &&
             spaceOnly.test(title) === false &&
@@ -21,18 +32,18 @@ Meteor.methods({
             options.length >= 2) {
             var pendingPoll = {};
             pendingPoll.owner = Meteor.userId();
-            pendingPoll.title = title;
+            pendingPoll.title = escapeHtmlEntites(title);
             pendingPoll.results = {};
             pendingPoll.votedBy = [];
-            for (var i = 0; i < options.length; i++) {
-                pendingPoll.results[options[i]] = 0;
-            }
+            options.map(escapeHtmlEntites).forEach(function (option) {
+                pendingPoll.results[option] = 0;
+            });
             return Polls.insert(pendingPoll);
         } else {
             throw new Meteor.Error(400,"Bad Request");
         }
     },
-    
+
     voteFor: function (pollId, option) {
         var clientIp = (this.connection.httpHeaders["x-forwarded-for"]).split(",")[0];
         var poll = Polls.findOne(pollId);
@@ -40,7 +51,7 @@ Meteor.methods({
         var IpHaveNotVoted = poll.votedBy.indexOf(clientIp) === -1;
         var inc = {};
         inc["results."+option] = 1;
-        
+
         if (spaceOnly.test(option) === false) {
             var whoVoting = [];
             if (userHaveNotVoted && Meteor.userId()) {
@@ -61,7 +72,7 @@ Meteor.methods({
             throw new Meteor.Error(400,"Bad Request");
         }
     },
-    
+
     removePoll: function (pollId) {
         var poll = Polls.findOne(pollId);
         if (poll.owner === Meteor.userId()) {
